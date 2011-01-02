@@ -1,7 +1,7 @@
 var Path = require('path'),
     Url = require('url'),
     Fs = require('fs'),
-    getMime = require('./simple-mime')("application/octet-stream");
+    getMime = require('simple-mime')("application/octet-stream");
 
 var ENOENT = process.ENOENT || require('constants').ENOENT;
 
