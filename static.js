@@ -71,8 +71,14 @@ module.exports = function setup(mount, root, index) {
       }
       headers["Content-Length"] = end - start + 1;
       headers["Content-Type"] = getMime(path);
+      if (stat.size === 0) {
+        res.writeHead(code, headers);
+        return res.end();
+      }
       var stream = Fs.createReadStream(path, {start: start, end: end});
-      res.writeHead(code, headers);
+      stream.once('data', function (chunk) {
+        res.writeHead(code, headers);
+      });
       stream.pipe(res);
       stream.on('error', next);
     }
