@@ -3,13 +3,23 @@ var Path = require('path'),
     Fs = require('fs'),
     getMime = require('simple-mime')("application/octet-stream");
 
+// Compat stuff to make this work on the v0.2.x and v0.3.x branches of node
 var ENOENT = process.ENOENT || require('constants').ENOENT;
-
 var StreamProto = require('net').Stream.prototype.__proto__;
 if (!StreamProto.hasOwnProperty('pipe')) {
   var sys = require('sys');
   StreamProto.pipe = function (other) {
     sys.pump(this, other);
+  };
+}
+if (!process.EventEmitter.prototype.hasOwnProperty('once')) {
+  process.EventEmitter.prototype.once = function (type, listener) {
+    var self = this;
+    self.on(type, function g() {
+      self.removeListener(type, g);
+      listener.apply(this, arguments);
+    });
+   return this;
   };
 }
 
