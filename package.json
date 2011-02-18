@@ -2,7 +2,7 @@
   "name": "creationix",
   "description": "Creationix is a meta package for my personal packages",
   "tags": ["stack", "creationix", "meta", "sandbox"],
-  "version": "0.0.9",
+  "version": "0.0.10",
   "author": "Tim Caswell <tim@creationix.com>",
   "repository": {
     "type": "git",
@@ -13,6 +13,7 @@
     "auth": "auth.js",
     "listing": "listing.js",
     "mount": "mount.js",
+    "vhost": "vhost.js",
     "log": "log.js",
     "controllers": "controllers.js"
   },
