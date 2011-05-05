@@ -86,6 +86,14 @@ module.exports = function setup(mount, root, index) {
         res.writeHead(code, headers);
         return res.end();
       }
+      if (process.ENOENT) {
+        Fs.readFile(path, function (err, data) {
+          if (err) { return next(err); }
+          res.writeHead(code, headers);
+          res.end(data);
+        });
+        return;
+      }
       var stream = Fs.createReadStream(path, {start: start, end: end});
       stream.once('data', function (chunk) {
         res.writeHead(code, headers);

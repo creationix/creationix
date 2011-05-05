@@ -3,7 +3,7 @@ var Fs = require('fs'),
     Url = require('url'),
     getMime = require('simple-mime')("application/octet-stream");
 
-var ENOENT = require('constants').ENOENT;
+var ENOENT = process.ENOENT || require('constants').ENOENT;
 
 module.exports = function setup(mount, root, showHidden) {
 
