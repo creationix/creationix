@@ -21,7 +21,7 @@ module.exports = function setup(mount, folder, uglify) {
   return function handle(req, res, next) {
     if (!req.uri) { req.uri = Url.parse(req.url); }
     if (req.uri.pathname !== mount) return next();
-    var names = req.uri.query.split(",");
+    var names = req.uri.query.split(",").reverse();
 
     var has = {};
     var scripts = [];
@@ -38,11 +38,11 @@ module.exports = function setup(mount, folder, uglify) {
         if (matches) {
           matches = Array.prototype.slice.call(matches).map(function (dep) {
             return dep.match(findName)[1];
-          });
+          }).reverse();
 
           function getDep(err) {
             if (err) return next(err);
-            var dep = matches.shift();
+            var dep = matches.pop();
             if (!dep) return doneDeps();
             loadScript(dep, getDep);
           }
@@ -64,7 +64,7 @@ module.exports = function setup(mount, folder, uglify) {
     
     function getName(err) {
       if (err) return next(err);
-      var name = names.shift();
+      var name = names.pop();
       if (!name) return done();
       loadScript(name, getName);
     }

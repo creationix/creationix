@@ -1,8 +1,5 @@
-// This is a super simple module system for use in the browser.  You first
-// define your module using the "define" function and then later require it
-// using "require" This does not support circular dependencies or require search
-// paths.  It's a simple module repository for writing clean code.
-
+// Super simple require system to go along with the server-side help in the
+// autoloader middleware for "creationix".
 (function () {
 
 // Store our repository in private variables in this closure.
