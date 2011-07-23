@@ -6,6 +6,7 @@
 
 var Fs = require('fs'),
     Path = require('path'),
+    Url = require('url'),
     QueryString = require('querystring');
 
 var findAll = new RegExp("require\\(['\"][^\"']+['\"]\\)", "g");
