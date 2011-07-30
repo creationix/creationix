@@ -26,6 +26,7 @@ if (!process.EventEmitter.prototype.hasOwnProperty('once')) {
 // Super simple static file server
 module.exports = function setup(mount, root, index) {
   return function (req, res, next) {
+    if (req.method !== 'GET') return next();
     if (!req.uri) { req.uri = Url.parse(req.url); }
     var path = unescape(req.uri.pathname).replace(/\.\.+/g, '.');
     if (!path || path.substr(0, mount.length) !== mount) {
