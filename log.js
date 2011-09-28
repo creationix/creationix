@@ -11,16 +11,18 @@ module.exports = function setup(special) {
     var start = Date.now();
     res.writeHead = function (code, headers) {
       var extra = [];
-      Object.keys(headers).forEach(function (key) {
-        if (special.hasOwnProperty(key)) {
-          extra.push(key + "=" + headers[key]);
+      if (headers) {
+        Object.keys(headers).forEach(function (key) {
+          if (special.hasOwnProperty(key)) {
+            extra.push(key + "=" + headers[key]);
+          }
+        });
+        if (!headers.hasOwnProperty('Date')) {
+          headers.Date = (new Date()).toUTCString();
         }
-      });
-      if (!headers.hasOwnProperty('Date')) {
-        headers.Date = (new Date()).toUTCString();
+        headers.Server = "NodeJS " + process.version;
+        headers["X-Runtime"] = Date.now() - start;
       }
-      headers.Server = "NodeJS " + process.version;
-      headers["X-Runtime"] = Date.now() - start;
       console.log("%s %s %s %s", req.method, req.url, code, extra.join(" "));
       res.writeHead = writeHead;
       res.writeHead(code, headers);
