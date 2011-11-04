@@ -3,8 +3,6 @@ var Fs = require('fs'),
     Url = require('url'),
     getMime = require('simple-mime')("application/octet-stream");
 
-var ENOENT = process.ENOENT || require('constants').ENOENT;
-
 module.exports = function setup(mount, root, showHidden) {
 
   return function handle(req, res, next) {
@@ -17,7 +15,7 @@ module.exports = function setup(mount, root, showHidden) {
     if (path[path.length - 1] === '/') { path = path.substr(0, path.length - 1); }
     Fs.stat(path, function (err, stat) {
       if (err) { 
-        if (err.errno === ENOENT) { return next(); }
+        if (err.code === 'ENOENT') { return next(); }
         return next(err); 
       }
       if (!stat.isDirectory()) {
