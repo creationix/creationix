@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/creationix/creationix.png)](http://travis-ci.org/creationix/creationix)
 This package is NOT supported.
 
 You're welcome to use it, all code is MIT licensed by Tim Caswell
