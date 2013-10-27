@@ -10,6 +10,7 @@
     "type": "git",
     "url": "http://github.com/creationix/creationix.git"
   },
+  "main": "index.js",
   "bin": {
     "share": "./share.js"
   },
