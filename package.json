@@ -14,6 +14,6 @@
     "share": "./share.js"
   },
   "dependencies": {
-    "send": "~0.1.4"
+    "send": "~0.17.1"
   }
 }
